@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India Tech Events 2026</title>
+  <style>
+    :root {
+      --bg: #070707;
+      --surface: #0d0d0d;
+      --surface-2: #121212;
+      --surface-3: #171717;
+      --border: #252525;
+      --border-soft: #1d1d1d;
+      --text: #f5f5f2;
+      --muted: #858585;
+      --muted-2: #a7a7a3;
+      --yellow: #f3cf45;
+      --yellow-soft: rgba(243, 207, 69, .10);
+      --red: #ef4444;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; }
+    button { color: inherit; }
+
+    .shell {
+      width: 100vw;
+      height: 100vh;
+      padding: 24px 28px 18px;
+      display: grid;
+      grid-template-rows: 64px minmax(0, 1fr) 44px;
+      gap: 18px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 16px;
+      min-width: 0;
+    }
+    .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--yellow); color: #080808;
+      font-size: 13px; font-weight: 950; letter-spacing: -.04em;
+      flex: 0 0 auto;
+    }
+    .brand-copy { min-width: 0; }
+    .brand-title { font-size: 15px; font-weight: 820; letter-spacing: -.02em; white-space: nowrap; }
+    .brand-sub { color: var(--muted); font-size: 11px; margin-top: 3px; letter-spacing: .01em; }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .ghost-btn, .fs-btn {
+      height: 36px; border-radius: 10px; padding: 0 13px;
+      border: 1px solid var(--border); background: #0b0b0b;
+      cursor: pointer; font-size: 12px; font-weight: 760;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .ghost-btn:hover, .fs-btn:hover { background: #141414; border-color: #3a3a3a; }
+    .fs-btn { background: var(--yellow); color: #080808; border-color: var(--yellow); font-weight: 900; }
+    .fs-btn:hover { background: #ffe16a; border-color: #ffe16a; }
+
+    .workspace {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 244px minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .nav {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-right: 4px;
+    }
+    .nav-label {
+      color: #666;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 2px 0 8px 2px;
+    }
+    .nav-btn {
+      width: 100%; height: 50px;
+      display: grid;
+      grid-template-columns: 28px minmax(0,1fr) auto;
+      align-items: center; gap: 10px;
+      padding: 0 11px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .nav-btn:hover { background: #0f0f0f; border-color: #181818; }
+    .nav-btn.active { background: var(--yellow-soft); border-color: rgba(243,207,69,.25); }
+    .nav-num {
+      width: 28px; height: 28px; border-radius: 8px;
+      border: 1px solid var(--border); color: #727272;
+      display: grid; place-items: center; font-size: 10px; font-weight: 900;
+    }
+    .nav-btn.active .nav-num { background: var(--yellow); border-color: var(--yellow); color: #080808; }
+    .nav-name {
+      font-size: 12px; font-weight: 790; line-height: 1.12;
+      letter-spacing: -.012em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .nav-count { color: #5f5f5f; font-size: 10px; font-weight: 800; }
+    .nav-btn.active .nav-count { color: var(--yellow); }
+
+    .content {
+      min-width: 0; min-height: 0;
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      background: #090909;
+      padding: clamp(22px, 2.4vw, 38px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+      position: relative;
+    }
+    .content::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--yellow);
+      opacity: .9;
+    }
+
+    .category-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 2px 2px 22px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .category-copy { min-width: 0; }
+    .category-kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+    .category-title {
+      margin: 0;
+      font-size: clamp(34px, 3.4vw, 56px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+    .category-note {
+      margin: 10px 0 0;
+      color: var(--muted-2);
+      max-width: 760px;
+      font-size: 13px;
+      line-height: 1.42;
+    }
+    .category-stat { text-align: right; flex: 0 0 auto; padding-bottom: 3px; }
+    .stat-big { font-size: 34px; font-weight: 900; letter-spacing: -.05em; }
+    .stat-small { margin-top: 1px; color: #646464; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+
+    .event-area {
+      min-height: 0;
+      padding-top: 20px;
+      display: grid;
+      grid-template-rows: 28px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .event-area-head { display: flex; align-items: center; justify-content: space-between; }
+    .event-area-title { color: #727272; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .14em; }
+    .event-area-hint { color: #5f5f5f; font-size: 11px; font-weight: 700; }
+
+
+    /* Event type sections: keep the category page scannable while recording */
+    .events {
+      display: flex !important;
+      flex-direction: column;
+      gap: 14px !important;
+      overflow: hidden;
+    }
+    .event-section {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 24px auto;
+      gap: 8px;
+    }
+    .event-section + .event-section {
+      padding-top: 12px;
+      border-top: 1px solid #1d1d1d;
+    }
+    .event-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-width: 0;
+    }
+    .event-section-title-wrap { display:flex; align-items:center; gap:9px; min-width:0; }
+    .event-section-dot { width:6px; height:6px; border-radius:50%; background:var(--yellow); flex:0 0 auto; }
+    .event-section-title {
+      color: #b7b7b1;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      white-space: nowrap;
+    }
+    .event-section-count { color:#555; font-size:10px; font-weight:850; white-space:nowrap; }
+    .event-section-grid {
+      display: grid;
+      gap: 10px;
+      min-height: 0;
+      align-content: start;
+    }
+    .event-section-grid.cols-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .event-section-grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .event-section-grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .event-section-grid.cols-1 { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+    .event-section-grid .event-card { min-height: 112px; }
+
+    .events {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: minmax(112px, 150px);
+      gap: 12px;
+      align-content: stretch;
+      overflow: hidden;
+    }
+    .event-card {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #0d0d0d;
+      padding: 15px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      animation: cardIn .28s ease both;
+    }
+    .event-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(243,207,69,.46);
+      background: #11110f;
+    }
+    .event-card::after {
+      content: "↗";
+      position: absolute; right: 14px; top: 13px;
+      color: #4f4f4f; font-size: 13px; font-weight: 800;
+      transition: color .16s ease, transform .16s ease;
+    }
+    .event-card:hover::after { color: var(--yellow); transform: translate(2px,-2px); }
+    .event-type {
+      color: #717171; font-size: 10px; font-weight: 900;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding-right: 32px;
+    }
+    .event-name {
+      margin-top: 8px;
+      font-size: clamp(17px, 1.35vw, 23px);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      font-weight: 840;
+      max-width: 90%;
+    }
+    .event-bottom { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .event-date { color: var(--yellow); font-size: 11px; font-weight: 850; white-space: nowrap; }
+    .event-city { color: #686868; font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 244px minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+    }
+    .footer-note { color: #565656; font-size: 10px; font-weight: 700; padding-left: 2px; }
+    .footer-right { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .progress-track { height: 2px; background: #1a1a1a; flex: 1; position: relative; }
+    .progress-bar { height: 100%; background: var(--yellow); width: 0; transition: width .22s ease; }
+    .progress-copy { color: #686868; font-size: 10px; font-weight: 800; white-space: nowrap; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 20;
+      background: rgba(0,0,0,.78);
+      display: grid; place-items: center;
+      padding: 30px;
+      opacity: 0; visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+    }
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
+    .modal {
+      width: min(1040px, 94vw);
+      max-height: min(760px, calc(100vh - 60px));
+      border: 1px solid #303030;
+      border-radius: 20px;
+      background: #0d0d0d;
+      box-shadow: 0 28px 90px rgba(0,0,0,.62);
+      padding: 26px;
+      display: grid;
+      grid-template-rows: auto auto auto auto;
+      gap: 20px;
+      transform: translateY(12px) scale(.985);
+      transition: transform .18s ease;
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+    .modal-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .modal-kicker { color: var(--yellow); font-size: 10px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 8px; }
+    .modal-title { margin: 0; font-size: clamp(30px, 3vw, 46px); line-height: .98; letter-spacing: -.05em; font-weight: 880; max-width: 700px; }
+    .close-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid var(--border); background: #131313;
+      cursor: pointer; color: #8b8b8b; font-size: 18px; flex: 0 0 auto;
+    }
+    .close-btn:hover { color: #fff; border-color: #444; }
+
+    .meta-strip { display: grid; grid-template-columns: 1.05fr 1.45fr .95fr .95fr; gap: 10px; }
+    .meta-box { border: 1px solid var(--border-soft); background: #101010; border-radius: 12px; padding: 12px 13px; min-width: 0; }
+    .meta-label { color: #606060; font-size: 8px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 5px; }
+    .meta-value { font-size: 12px; font-weight: 800; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .detail-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; min-height: 0; }
+    .detail-card { border-top: 1px solid var(--border-soft); padding-top: 15px; }
+    .detail-heading { color: #656565; font-size: 9px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+    .detail-text { margin: 0; color: #d2d2ce; font-size: 13px; line-height: 1.45; }
+    .why-text { color: #f2f2ee; font-size: 16px; line-height: 1.34; font-weight: 720; letter-spacing: -.012em; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .tag { border: 1px solid #2b2b2b; background: #121212; color: #a6a6a1; border-radius: 999px; padding: 6px 9px; font-size: 9px; font-weight: 780; }
+
+    .modal-actions {
+      display: grid; grid-template-columns: 42px minmax(0,1fr) 42px; gap: 10px;
+      align-items: center;
+    }
+    .event-nav-btn {
+      width: 42px; height: 42px; border-radius: 11px; border: 1px solid var(--border);
+      background: #111; cursor: pointer; color: #777; font-size: 17px;
+    }
+    .event-nav-btn:hover { color: #fff; border-color: #424242; }
+    .official-btn {
+      height: 46px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 16px; text-decoration: none;
+      background: var(--yellow); color: #080808;
+      font-weight: 900; font-size: 12px;
+      border: 1px solid var(--yellow);
+      transition: background .15s ease, transform .15s ease;
+      min-width: 0;
+    }
+    .official-btn:hover { background: #ffe16a; transform: translateY(-1px); }
+    .official-domain { font-size: 10px; font-weight: 750; opacity: .65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .tiny-red {
+      display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--red);
+      margin-right: 7px; vertical-align: 1px;
+    }
+
+
+    /* Cover / intro */
+    .cover-screen {
+      position: fixed; inset: 0; z-index: 100;
+      background: #070707;
+      display: grid;
+      grid-template-rows: auto minmax(0,1fr) auto;
+      padding: clamp(28px, 4vw, 64px);
+      opacity: 1; visibility: visible;
+      transition: opacity .28s ease, visibility .28s ease;
+    }
+    .cover-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .cover-top, .cover-bottom { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .cover-id { display:flex; align-items:center; gap:12px; color:#b3b3ad; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .cover-id-mark { width:34px; height:34px; border-radius:10px; background:var(--yellow); color:#080808; display:grid; place-items:center; font-weight:950; letter-spacing:-.04em; }
+    .cover-year { color:#626262; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .cover-center { align-self:center; max-width:1100px; padding: 2vh 0; }
+    .cover-eyebrow { color:var(--yellow); font-size:11px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px; }
+    .cover-title { margin:0; font-size:clamp(62px, 7.5vw, 128px); line-height:.86; letter-spacing:-.075em; font-weight:900; max-width:1100px; }
+    .cover-title span { color:#868680; }
+    .cover-sub { margin:28px 0 0; color:#a3a39d; font-size:clamp(15px,1.35vw,20px); line-height:1.5; max-width:760px; }
+    .cover-categories { margin-top:28px; display:flex; flex-wrap:wrap; gap:8px; max-width:900px; }
+    .cover-chip { border:1px solid #242424; border-radius:999px; padding:8px 11px; color:#858580; font-size:10px; font-weight:800; }
+    .start-btn { margin-top:34px; height:50px; padding:0 19px; border:1px solid var(--yellow); border-radius:12px; background:var(--yellow); color:#080808; cursor:pointer; font-size:12px; font-weight:950; letter-spacing:-.01em; }
+    .start-btn:hover { background:#ffe16a; border-color:#ffe16a; transform:translateY(-1px); }
+    .cover-bottom { border-top:1px solid #181818; padding-top:18px; color:#565656; font-size:10px; font-weight:750; }
+    .cover-bottom strong { color:#8b8b85; font-weight:850; }
+
+    /* Video-priority and richer event details */
+    .event-card.top-pick { border-color: rgba(243,207,69,.42); background:#10100d; }
+    .event-card.top-pick::before {
+      content:"TOP PICK"; position:absolute; left:14px; top:12px;
+      color:#090909; background:var(--yellow); border-radius:6px;
+      padding:4px 6px; font-size:7px; font-weight:950; letter-spacing:.11em;
+    }
+    .event-card.top-pick .event-type { padding-left:68px; color:#96968e; }
+    .event-card.top-pick:hover { border-color:rgba(243,207,69,.72); }
+    .top-pick-note { display:flex; align-items:center; gap:8px; min-height:34px; padding:9px 11px; border:1px solid rgba(243,207,69,.24); background:rgba(243,207,69,.07); border-radius:10px; color:#d7d2b8; font-size:10px; line-height:1.35; font-weight:760; }
+    .top-pick-note strong { color:var(--yellow); font-size:8px; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; }
+    .fee-value.free { color:#9be6b7; }
+    .fee-value.paid { color:#ffd166; }
+    .fee-value.mixed, .fee-value.tba { color:#b8b8b2; }
+    .detail-columns { display:grid; grid-template-columns:1.08fr .92fr; gap:18px; min-height:0; }
+    .detail-stack { display:grid; gap:14px; min-height:0; }
+    .detail-block { border-top:1px solid var(--border-soft); padding-top:12px; }
+    .detail-block:first-child { border-top:0; padding-top:0; }
+    .detail-heading-sm { color:#666; font-size:8px; font-weight:950; letter-spacing:.14em; text-transform:uppercase; margin-bottom:7px; }
+    .detail-copy { color:#d2d2cc; font-size:12px; line-height:1.42; margin:0; }
+    .detail-copy.strong { color:#f0f0eb; font-size:13px; font-weight:720; line-height:1.38; }
+    .mini-list { display:grid; gap:6px; margin-top:9px; }
+    .mini-item { position:relative; padding-left:14px; color:#a8a8a2; font-size:10px; line-height:1.35; }
+    .mini-item::before { content:""; width:4px; height:4px; border-radius:50%; background:var(--yellow); position:absolute; left:1px; top:5px; }
+    .registration-box { border:1px solid #252525; background:#101010; border-radius:11px; padding:11px 12px; }
+    .registration-title { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+    .registration-title span:first-child { color:#696969; font-size:8px; font-weight:950; letter-spacing:.14em; text-transform:uppercase; }
+    .registration-status { color:var(--yellow); font-size:9px; font-weight:900; }
+    .price-note { color:#8f8f89; font-size:9px; line-height:1.35; margin-top:5px; }
+    .modal-source-note { color:#575757; font-size:8px; text-align:center; margin-top:-8px; }
+
+
+    /* Readable on-camera event detail view */
+    .modal { width:min(1160px, 95vw); max-height:min(830px, calc(100vh - 44px)); padding:30px 32px; gap:22px; }
+    .modal-kicker { font-size:11px; margin-bottom:10px; }
+    .modal-title { font-size:clamp(34px, 3vw, 48px); max-width:820px; }
+    .top-pick-note { min-height:40px; padding:10px 13px; font-size:12px; line-height:1.45; gap:10px; }
+    .top-pick-note strong { font-size:9px; }
+    .meta-strip { gap:12px; }
+    .meta-box { padding:14px 15px; }
+    .meta-label { font-size:9px; margin-bottom:7px; }
+    .meta-value { font-size:13px; line-height:1.3; }
+    .detail-columns { gap:28px; }
+    .detail-stack { gap:19px; }
+    .detail-block { padding-top:16px; }
+    .detail-heading-sm { font-size:10px; margin-bottom:9px; }
+    .detail-copy { font-size:15px; line-height:1.52; }
+    .detail-copy.strong { font-size:16px; line-height:1.48; }
+    .mini-list { gap:8px; margin-top:12px; }
+    .mini-item { padding-left:16px; font-size:12px; line-height:1.45; }
+    .mini-item::before { width:5px; height:5px; top:6px; }
+    .tags { gap:8px; margin-top:12px; }
+    .tag { padding:7px 10px; font-size:10px; }
+    .registration-box { padding:14px 15px; border-radius:12px; }
+    .registration-title { margin-bottom:8px; }
+    .registration-title span:first-child { font-size:9px; }
+    .registration-status { font-size:10px; }
+    .price-note { font-size:11px; line-height:1.45; margin-top:8px; }
+    .official-btn { height:52px; padding:0 18px; font-size:13px; }
+    .official-domain { font-size:11px; }
+    .modal-source-note { font-size:9px; margin-top:-6px; }
+
+    @media (max-height: 820px) {
+      .cover-screen { padding:24px 36px; }
+      .cover-title { font-size:clamp(52px, 7vw, 88px); }
+      .cover-sub { margin-top:18px; font-size:14px; }
+      .cover-categories { margin-top:18px; }
+      .start-btn { margin-top:22px; height:44px; }
+      .modal { width:min(1120px, 96vw); padding:18px 22px; gap:13px; max-height:calc(100vh - 24px); }
+      .modal-title { font-size:34px; }
+      .meta-strip { gap:8px; }
+      .meta-box { padding:10px 11px; }
+      .detail-columns { gap:19px; }
+      .detail-stack { gap:12px; }
+      .detail-copy { font-size:13px; line-height:1.42; }
+      .detail-copy.strong { font-size:14px; line-height:1.4; }
+      .mini-list { margin-top:8px; gap:5px; }
+      .mini-item { font-size:10.5px; line-height:1.35; }
+      .tags { margin-top:9px; gap:6px; }
+      .tag { padding:6px 8px; font-size:9px; }
+      .registration-box { padding:10px 11px; }
+      .event-section { grid-template-rows:20px auto; gap:6px; }
+      .event-section + .event-section { padding-top:8px; }
+      .event-section-grid { gap:8px; }
+      .event-section-grid .event-card { min-height:88px; }
+      .event-section-title { font-size:9px; }
+      .event-section-count { font-size:8px; }
+      .modal-actions { margin-top:-2px; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-height: 820px) {
+      .shell { padding-top: 14px; padding-bottom: 10px; grid-template-rows: 50px minmax(0,1fr) 28px; gap: 10px; }
+      .topbar { padding-bottom: 10px; }
+      .content { padding-top: 18px; padding-bottom: 18px; }
+      .category-head { padding-bottom: 14px; }
+      .category-note { margin-top: 7px; }
+      .event-area { padding-top: 12px; gap: 8px; grid-template-rows: 22px minmax(0,1fr); }
+      .events { gap: 8px; grid-auto-rows: minmax(92px, 118px); }
+      .event-card { padding: 10px 12px; }
+      .event-name { margin-top: 6px; font-size: 16px; }
+      .event-bottom { margin-top: 8px; }
+      .nav-btn { height: 40px; }
+      .nav { gap: 3px; }
+      .footer { min-height: 0; }
+    }
+
+    @media (max-width: 1280px) {
+      .shell { padding: 18px 20px 14px; gap: 14px; grid-template-rows: 58px minmax(0,1fr) 36px; }
+      .workspace, .footer { grid-template-columns: 214px minmax(0, 1fr); gap: 16px; }
+      .nav { gap: 4px; }
+      .nav-btn { height: 44px; }
+      .content { padding: 24px; }
+      .events { gap: 9px; grid-auto-rows: minmax(96px,1fr); }
+      .event-card { padding: 12px 13px; }
+      .event-name { font-size: 17px; }
+      .category-title { font-size: 38px; }
+      .category-note { font-size: 12px; }
+    }
+
+    @media (max-width: 900px) {
+      .shell { padding: 14px; grid-template-rows: 54px minmax(0,1fr) 34px; }
+      .workspace { grid-template-columns: 170px minmax(0,1fr); gap: 10px; }
+      .footer { grid-template-columns: 170px minmax(0,1fr); gap: 10px; }
+      .nav-name { font-size: 10px; }
+      .nav-btn { grid-template-columns: 24px minmax(0,1fr); height: 42px; padding: 0 8px; }
+      .nav-num { width: 24px; height: 24px; }
+      .nav-count { display: none; }
+      .events { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .event-section-grid.cols-4 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .category-stat { display: none; }
+      .category-title { white-space: normal; }
+      .modal { width: min(780px, 94vw); }
+    }
+  </style>
+</head>
+<body>
+  <section class="cover-screen" id="coverScreen">
+    <div class="cover-top">
+      <div class="cover-id"><span class="cover-id-mark">26</span><span>India Tech Event Guide</span></div>
+      <div class="cover-year"><span class="tiny-red"></span>August → December 2026</div>
+    </div>
+
+    <div class="cover-center">
+      <div class="cover-eyebrow">For Indian tech students</div>
+      <h1 class="cover-title">Upcoming Tech Events<br><span>India 2026.</span></h1>
+      <p class="cover-sub">A curated 2026 guide across web development, AI, design, animation, gaming, cybersecurity, competitive programming, remote events and future tech.</p>
+      <div class="cover-categories">
+        <span class="cover-chip">Web & Software</span><span class="cover-chip">AI, Data & Cloud</span><span class="cover-chip">UI/UX</span><span class="cover-chip">Animation & VFX</span><span class="cover-chip">Game Dev</span><span class="cover-chip">Cybersecurity</span><span class="cover-chip">Competitive Programming</span><span class="cover-chip">Online</span><span class="cover-chip">Future Tech</span>
+      </div>
+      <button class="start-btn" id="startPresentation">Start with Web & Software →</button>
+    </div>
+
+    <div class="cover-bottom">
+      <span><strong>Top picks</strong> are highlighted so you know what to prioritize.</span>
+      <span>Official links inside • pricing/registration checked 10 Aug 2026</span>
+    </div>
+  </section>
+
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">26</div>
+        <div class="brand-copy">
+          <div class="brand-title">India Tech Events 2026</div>
+          <div class="brand-sub"><span class="tiny-red"></span>August to December • official links</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="ghost-btn" id="showIntro">Intro</button>
+        <button class="ghost-btn" id="prevCategory">← Category</button>
+        <button class="ghost-btn" id="nextCategory">Category →</button>
+        <button class="fs-btn" id="fullscreen">Full Screen</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="nav" id="categoryNav"></aside>
+
+      <section class="content">
+        <header class="category-head">
+          <div class="category-copy">
+            <div class="category-kicker" id="categoryKicker">01 / 09</div>
+            <h1 class="category-title" id="categoryTitle">Web Dev & Software Engineering</h1>
+            <p class="category-note" id="categoryNote"></p>
+          </div>
+          <div class="category-stat">
+            <div class="stat-big" id="eventCount">09</div>
+            <div class="stat-small">events</div>
+          </div>
+        </header>
+
+        <div class="event-area">
+          <div class="event-area-head">
+            <div class="event-area-title">Upcoming events • grouped by format</div>
+            <div class="event-area-hint">Click an event for complete details</div>
+          </div>
+          <div class="events" id="events"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-note">Built for a video presentation • India-first</div>
+      <div class="footer-right">
+        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="progress-copy" id="progressCopy">01 / 09</div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modal"></div>
+  </div>
+
+<script>
+const categories = [
+  {
+    id: 'web',
+    icon: '💻',
+    title: 'Web Dev & Software Engineering',
+    short: 'Your core audience first',
+    note: 'Start here. These are the most relevant picks for JavaScript, frontend, open source, mobile and student builders.',
+    color: '#ff304f',
+    chips: ['Frontend', 'Open Source', 'Mobile', 'Hackathons'],
+    events: [
+      {
+        name: 'IndiaFOSS 2026',
+        date: '26-27 Sep 2026',
+        location: 'NIMHANS Convention Centre, Bengaluru',
+        type: 'Open Source',
+        url: 'https://fossunited.org/indiafoss/2026',
+        tags: ['OSS', 'Communities', 'Engineering'],
+        bestFor: ['Open source beginners', 'Software engineers', 'College developers'],
+        what: 'A community-led open source conference by FOSS United. Great for students who want to understand contributors, maintainers and real software communities.',
+        why: 'Perfect bridge from learning code to seeing how real engineering communities work.'
+      },
+      {
+        name: 'Open Source India 2026',
+        date: '7-8 Oct 2026',
+        location: 'Bengaluru',
+        type: 'Developer Conference',
+        url: 'https://www.opensourceindia.in/',
+        tags: ['Linux', 'Cloud', 'OSS'],
+        bestFor: ['DevOps learners', 'Backend students', 'Open source fans'],
+        what: 'A large open-source conference and expo focused on open source software, cloud, DevOps and engineering communities.',
+        why: 'Good for students who want industry exposure beyond college-level coding.'
+      },
+      {
+        name: 'Google DevFest 2026',
+        date: '1 Oct-31 Dec 2026 season',
+        location: 'Multiple Indian cities',
+        type: 'Local Developer Events',
+        url: 'https://developers.google.com/community/devfest',
+        altUrl: 'https://gdg.community.dev/events/',
+        tags: ['Google', 'Web', 'AI', 'Cloud'],
+        bestFor: ['Beginners', 'Students outside metro cities', 'AI and web learners'],
+        what: 'Community-run events by Google Developer Groups covering Google technologies, AI, web, Android, cloud and networking.',
+        why: 'Most practical recommendation because students can search their nearest GDG instead of travelling across India.'
+      },
+      {
+        name: 'React India 2026',
+        date: '29-31 Oct 2026',
+        location: 'Planet Hollywood Beach Resort, Goa',
+        type: 'Frontend Conference',
+        url: 'https://reactindia.io/',
+        tags: ['React', 'JavaScript', 'Frontend'],
+        bestFor: ['Frontend developers', 'React learners', 'JS students'],
+        what: 'India’s premier React conference with workshops, talks, networking and frontend ecosystem exposure.',
+        why: 'This is the most direct match for your existing web-development audience.'
+      },
+      {
+        name: 'droidCon India',
+        date: '20 Nov 2026',
+        location: 'Conrad Bengaluru',
+        type: 'Android Conference',
+        url: 'https://india.droidcon.com/',
+        tags: ['Android', 'Kotlin', 'Mobile'],
+        bestFor: ['Android developers', 'Mobile app learners', 'Kotlin students'],
+        what: 'Android-focused conference for mobile engineers, with technical sessions and workshops around the Android ecosystem.',
+        why: 'Good for students who want to move from web into serious mobile engineering.'
+      },
+      {
+        name: 'FlutterCon India',
+        date: '21 Nov 2026',
+        location: 'Conrad Bengaluru',
+        type: 'Flutter Conference',
+        url: 'https://india.fluttercon.dev/',
+        tags: ['Flutter', 'Dart', 'Mobile'],
+        bestFor: ['Flutter learners', 'Cross-platform developers', 'Mobile builders'],
+        what: 'Flutter and Dart focused event for cross-platform developers and mobile engineers.',
+        why: 'Useful for students choosing between web, Android, Flutter and app development.'
+      },
+      {
+        name: 'WordCamp Bengaluru 2026',
+        date: '21-22 Nov 2026',
+        location: 'St Joseph’s Boys’ High School, Bengaluru',
+        type: 'WordPress Community',
+        url: 'https://bengaluru.wordcamp.org/2026/',
+        tags: ['WordPress', 'Freelance', 'CMS'],
+        bestFor: ['Freelancers', 'Agency builders', 'Bloggers and creators'],
+        what: 'Community event around WordPress, web publishing, freelancing, design and business.',
+        why: 'Great TAM pick because it includes developers, designers, creators, agencies and freelancers.'
+      },
+      {
+        name: 'InnoHacks 4.0',
+        date: '3-4 Oct 2026',
+        location: 'KIET, Ghaziabad',
+        type: 'Student Hackathon',
+        url: 'https://innohacks.live/',
+        tags: ['Hackathon', 'Student', 'Build'],
+        bestFor: ['First-time hackers', 'College teams', 'Project builders'],
+        what: '24-hour student hackathon for teams building solutions to real-world problems with mentorship and problem statements.',
+        why: 'Beginner-friendly way to stop only watching tutorials and actually ship something.'
+      },
+      {
+        name: 'hackCBS 9.0',
+        date: '31 Oct-1 Nov 2026',
+        location: 'SSCBS, University of Delhi',
+        type: 'Student Hackathon',
+        url: 'https://hackcbs.tech/',
+        tags: ['Hackathon', 'Delhi', 'Student'],
+        bestFor: ['College developers', 'Product builders', 'Hackathon teams'],
+        what: 'Large student-run hackathon and conference in Delhi University’s ecosystem.',
+        why: 'Strong recommendation for Indian college developers who want a serious in-person hackathon.'
+      },
+      {
+        name: 'ETHGlobal Mumbai',
+        date: '6-8 Nov 2026',
+        location: 'Mumbai',
+        type: 'Web3 Hackathon',
+        url: 'https://ethglobal.com/events',
+        tags: ['Web3', 'Ethereum', 'Hackathon'],
+        bestFor: ['Advanced builders', 'Web3 learners', 'Protocol-curious devs'],
+        what: 'Builder-focused Ethereum/Web3 hackathon where participants build products under pressure with protocol partners and mentors.',
+        why: 'Not for everyone, but very strong for serious builders who want to experience high-pressure product shipping.'
+      }
+    ]
+  },
+  {
+    id: 'ai', icon: '🤖', title: 'AI, Data & Cloud', short: 'AI builders and backend crowd',
+    note: 'Use this section to widen the video beyond frontend and show students where the AI/cloud industry actually meets.',
+    color: '#8ab4ff', chips: ['AI', 'Data', 'Cloud', 'DevOps'],
+    events: [
+      { name:'Cypher 2026', date:'7-9 Oct 2026', location:'KTPO Whitefield, Bengaluru', type:'AI Conference', url:'https://cypher.analyticsindiamag.com/', tags:['AI','GenAI','Data'], bestFor:['AI learners','Data scientists','ML engineers'], what:'A major Indian AI conference by Analytics India Magazine covering AI, data, enterprise AI and AI ecosystem conversations.', why:'Use it to show students that AI is an industry, not just prompt engineering.' },
+      { name:'Civo Navigate India 2026', date:'24 Nov 2026', location:'Sheraton Grand Bengaluru Whitefield', type:'Cloud + DevOps', url:'https://www.civo.com/navigate/india/2026', tags:['Cloud','Kubernetes','DevOps'], bestFor:['Backend developers','Cloud learners','DevOps students'], what:'A one-day cloud, AI and DevOps conference focused on Kubernetes, infrastructure and platform engineering.', why:'Perfect for students who want to understand production engineering and cloud-native systems.' },
+      { name:'MLH Global Hack Week: Data', date:'11-17 Sep 2026', location:'Online', type:'Online Learning Event', url:'https://ghw.mlh.com/', tags:['Data','Free','Online'], bestFor:['Students with no travel budget','Beginners','Data learners'], what:'A free online week by Major League Hacking dedicated to data skills, challenges and community learning.', why:'Include this because anyone from any city can participate from home.' }
+    ]
+  },
+  {
+    id: 'design', icon: '🎨', title: 'UI/UX & Product Design', short: 'Designers + frontend overlap',
+    note: 'This expands the video beautifully. Frontend students already care about interface, product thinking and portfolio quality.',
+    color: '#b893ff', chips: ['UX', 'Product', 'HCI', 'Design Systems'],
+    events: [
+      { name:'UXINDIA 2026', date:'23-27 Sep 2026', location:'Bengaluru', type:'Design Leadership Week', url:'https://www.ux-india.org/', tags:['UX','Leadership','Portfolio'], bestFor:['UI/UX designers','Product designers','Design students'], what:'A five-day design leadership platform with tracks for senior leaders and rising design talent.', why:'Great for students who want to understand design beyond Dribbble shots and UI screens.' },
+      { name:'DesignUp26', date:'1-4 Oct 2026', location:'Sheraton Grand Whitefield, Bengaluru', type:'Design Festival', url:'https://26.designup.io/', tags:['Product','Design','Creative Tech'], bestFor:['Product designers','Design systems learners','Frontend + UI people'], what:'A design festival around product, business, digital design, UI/UX and design leadership.', why:'Probably the cleanest design-focused event to recommend for serious UI/UX learners.' },
+      { name:'India HCI 2026', date:'29-31 Oct 2026', location:'IIT Hyderabad', type:'HCI Conference', url:'https://www.2026.indiahci.org/', tags:['HCI','Accessibility','Research'], bestFor:['UX researchers','Accessibility learners','Design students'], what:'Human-Computer Interaction conference focused on inclusive, accessible and respectful futures in HCI.', why:'This gives the video a serious design-research angle instead of only visual design.' }
+    ]
+  },
+  {
+    id: 'creative', icon: '✨', title: 'Animation, VFX & Creative Tech', short: 'Creative audience expansion',
+    note: 'Use this section to attract students interested in animation, storytelling, anime, VFX and creative technology.',
+    color: '#ffd166', chips: ['Animation', 'VFX', 'Anime', 'Storytelling'],
+    events: [
+      { name:'Animation & More Summit 2026', date:'28-29 Aug 2026', location:'Mumbai', type:'Animation Summit', url:'https://animationandmoresummit.com/', tags:['Animation','IP','Studios'], bestFor:['Animators','Creative technologists','Storytellers'], what:'A summit for animation, creativity and technology focused on Indian creators building global IPs.', why:'Strong creative-tech pick that makes the video bigger than only coding.' },
+      { name:'ANN Awards 2026', date:'28-29 Aug 2026', location:'NESCO Exhibition Centre, Mumbai', type:'Animation Awards', url:'https://annawards.com/', tags:['Awards','Animation','Showcase'], bestFor:['Animation students','Studios','Independent creators'], what:'Recognition platform celebrating animation storytelling, innovation and technical achievement.', why:'Useful as a competition/showcase opportunity, not just an event to watch.' },
+      { name:'Anime India Mumbai 2026', date:'28-30 Aug 2026', location:'NESCO, Mumbai', type:'Anime Convention', url:'https://animeindia.live/mumbai/', tags:['Anime','Creators','Culture'], bestFor:['Anime creators','Illustrators','Designers'], what:'Anime-focused convention in Mumbai with creator culture, fandom and international guest presence.', why:'A wildcard pick for TAM. Creative students will instantly connect with it.' }
+    ]
+  },
+  {
+    id: 'game', icon: '🎮', title: 'Game Development & Interactive Tech', short: 'Game builders and 3D people',
+    note: 'Gaming is a massive interest bucket. Even web students understand graphics, storytelling, UI, systems and product from games.',
+    color: '#8af3c1', chips: ['Games', '3D', 'Indie', 'Interactive'],
+    events: [
+      { name:'India Game Developer Conference 2026', date:'28-29 Oct 2026', location:'Chennai Trade Centre, Chennai', type:'Game Dev Conference', url:'https://indiagdc.com/', tags:['Game Dev','Indie','Awards'], bestFor:['Game developers','3D artists','Interactive tech students'], what:'India’s biggest and oldest game developer conference with sessions, expo, awards, indie showcases and networking.', why:'Must include if you want the video to reach students beyond normal software jobs.' }
+    ]
+  },
+  {
+    id: 'cyber', icon: '🛡️', title: 'Cybersecurity & Ethical Hacking', short: 'Security learners',
+    note: 'A clean dedicated section for students who are into ethical hacking, security research and defensive engineering.',
+    color: '#ff6b7f', chips: ['Security', 'CTF', 'Research', 'Ethical Hacking'],
+    events: [
+      { name:'c0c0n 2026', date:'9-10 Oct 2026', location:'Grand Hyatt Bolgatty, Kochi', type:'Cybersecurity Conference', url:'https://www.c0c0n.org/', tags:['Cybersecurity','Hacking','Training'], bestFor:['Security students','Ethical hackers','Cybersecurity professionals'], what:'India’s long-running cybersecurity and hacking conference with training, conference days and security ecosystem exposure.', why:'This gives cybersecurity students one clear event to track and take seriously.' }
+    ]
+  },
+  {
+    id: 'cp', icon: '🏆', title: 'Competitive Programming', short: 'DSA and CP students',
+    note: 'Keep this separate from hackathons. Hackathons are for building. CP is for algorithmic problem solving.',
+    color: '#ffb86b', chips: ['DSA', 'Algorithms', 'College Teams'],
+    events: [
+      { name:'ICPC India 2026', date:'Prelim: 3 Oct • Regional: 22-23 Dec 2026', location:'Online + Kanpur/Gandhinagar/Pune', type:'Programming Contest', url:'https://kanpur.indiaicpc.in/', altUrl:'https://icpc.global/', tags:['ICPC','DSA','Algorithms'], bestFor:['Competitive programmers','College teams','DSA-focused students'], what:'The Indian ICPC cycle includes an online preliminary and onsite regional contest for collegiate programming teams.', why:'Important to explain the difference between building projects and solving high-level algorithmic problems.' }
+    ]
+  },
+  {
+    id: 'online', icon: '🌐', title: 'Online & Remote Friendly', short: 'For every city',
+    note: 'Use this as the access section. Not every student can travel, but everyone can still participate somewhere.',
+    color: '#8ab4ff', chips: ['Free', 'Remote', 'Global', 'Accessible'],
+    events: [
+      { name:'NASA Space Apps Challenge 2026', date:'14-15 Nov 2026', location:'Worldwide + local events', type:'Global Hackathon', url:'https://www.spaceappschallenge.org/', tags:['Space','Data','Hackathon'], bestFor:['Software students','Designers','Science lovers','Data learners'], what:'A global NASA hackathon where participants use open data to solve real-world Earth and space challenges.', why:'Huge TAM because it welcomes different ages, skill levels and backgrounds.' },
+      { name:'MLH Global Hack Week: Hacktoberfest', date:'9-15 Oct 2026', location:'Online', type:'Open Source Week', url:'https://ghw.mlh.com/', tags:['Open Source','Free','Online'], bestFor:['Open-source beginners','Remote learners','Students without travel budget'], what:'A free online week by Major League Hacking focused on open-source learning and community challenges.', why:'Good option for students who cannot travel but want to participate and build momentum.' },
+      { name:'GDG Event Finder', date:'Oct-Dec 2026 season', location:'Local + in-person across cities', type:'Find Local Events', url:'https://gdg.community.dev/events/', tags:['Local','Google','Community'], bestFor:['Students in tier-2/3 cities','Beginners','Community learners'], what:'Google Developer Group event directory where students can find local DevFest and community events near their city.', why:'This is the action step after telling them about DevFest.' }
+    ]
+  },
+  {
+    id: 'future', icon: '🚀', title: 'General Tech & Future Tech', short: 'End with the big picture',
+    note: 'Keep this at the end. It makes the video feel bigger and shows that tech is more than coding jobs.',
+    color: '#ff304f', chips: ['Future Tech', 'Startups', 'Semiconductors', 'Industry'],
+    events: [
+      { name:'SEMICON India 2026', date:'17-19 Sep 2026', location:'Yashobhoomi, New Delhi', type:'Semiconductor Ecosystem', url:'https://www.semiconindia.org/', tags:['Chips','Hardware','Deep Tech'], bestFor:['Electronics students','Deep-tech curious developers','AI infra learners'], what:'A semiconductor and electronics ecosystem event around silicon, systems, hardware, manufacturing and deep-tech collaboration.', why:'Shows students that the future of tech is also hardware, chips and infrastructure.' },
+      { name:'India Mobile Congress 2026', date:'7-10 Oct 2026', location:'Yashobhoomi, New Delhi', type:'Digital Tech Forum', url:'https://www.indiamobilecongress.com/', tags:['AI','Telecom','Cloud','Startups'], bestFor:['Tech students','Startup-curious students','Engineering explorers'], what:'A large digital technology forum covering connectivity, cloud, silicon, AI, cybersecurity, startups and future networks.', why:'Probably the strongest “see the scale of industry” event in India.' },
+      { name:'Bengaluru Tech Summit 2026', date:'17-19 Nov 2026', location:'BIEC, Bengaluru', type:'Technology Summit', url:'https://www.bengalurutechsummit.com/', tags:['AI','Startups','Deep Tech'], bestFor:['Startup students','AI learners','Engineering explorers'], what:'A major technology gathering under the theme AI & Beyond, bringing together industry, startups, researchers, investors and policymakers.', why:'Great closing recommendation for students who want to understand where the Indian tech ecosystem is going.' },
+      { name:'WeAreDevelopers Conference India', date:'25-26 Nov 2026', location:'Bengaluru', type:'Developer + AI Event', url:'https://www.wearedevelopers.com/conference-india', tags:['Developers','AI','Tech Leaders'], bestFor:['Developers','AI builders','Engineering leaders'], what:'Developer-focused India conference for AI builders and tech leaders, positioned around software lifecycle and real engineering practices.', why:'Strong end-card event for serious developers who want career and industry exposure.' }
+    ]
+  }
+];
+
+
+const eventMeta = {
+  'IndiaFOSS 2026': {
+    startDate:'2026-09-26', priority:'top', priorityReason:'Best open-source pick for your core developer audience.',
+    fee:'Paid', feeClass:'paid', feeDetail:'Ticketed event. The official site lists subsidised/community and discounted student tickets.',
+    format:'2-day in-person conference', registration:'Tickets are available through the official IndiaFOSS ticket page.',
+    experience:['Talks from maintainers and contributors','Open-source communities and project booths','Networking with engineers who build in public'],
+    gain:'A very practical bridge from “I know coding” to understanding real open-source engineering, contribution and community.'
+  },
+  'Open Source India 2026': {
+    startDate:'2026-10-07', fee:'Mixed', feeClass:'mixed', feeDetail:'Community passes can be free, but the official site says students need a subsidised Student Pass.',
+    format:'2-day conference + expo', registration:'Registration is open on the official OSI portal. Choose the pass that matches your attendee type.',
+    experience:['Open-source and Linux ecosystem','Cloud, DevOps and AI/ML tracks','Expo access and industry conversations'],
+    gain:'Useful for students who want to see open source in production, not only as GitHub contribution tutorials.'
+  },
+  'Google DevFest 2026': {
+    startDate:'2026-10-01', priority:'top', priorityReason:'Most accessible recommendation because students can find one near their own city.',
+    fee:'Mostly free', feeClass:'free', feeDetail:'Google says most DevFest events are free; some local GDGs may charge a small venue/catering fee.',
+    format:'Local community conferences', registration:'2026 season runs Oct 1–Dec 31. Registrations open city-by-city through local GDGs.',
+    experience:['AI, Cloud, Mobile and Web sessions','Hands-on workshops and community meetups','Local networking without major travel'],
+    gain:'One of the easiest ways for an Indian student to enter a real developer community without needing to fly to another city.'
+  },
+  'React India 2026': {
+    startDate:'2026-10-29', priority:'top', priorityReason:'Directly aligned with frontend/JavaScript students and your existing audience.',
+    fee:'Paid', feeClass:'paid', feeDetail:'Official site currently advertises tickets from ₹4,999; full conference passes have higher tiers.',
+    format:'Workshop day + 2 conference days', registration:'Early-bird tickets are currently available on the official site.',
+    experience:['React and JavaScript engineering talks','Workshops and ecosystem deep-dives','Networking with frontend engineers and speakers'],
+    gain:'For a serious frontend student, this is one of the most directly relevant conferences in the entire list.'
+  },
+  'droidCon India': {
+    startDate:'2026-11-20', fee:'Paid', feeClass:'paid', feeDetail:'Ticket shop is open. Team and combo-ticket discounts are advertised on the official site.',
+    format:'1-day Android conference', registration:'Tickets can be purchased from the official droidCon India website.',
+    experience:['Android engineering sessions','Hands-on workshops','Leadership and developer roundtables'],
+    gain:'Best suited to students already leaning toward Android/Kotlin rather than general web development.'
+  },
+  'FlutterCon India': {
+    startDate:'2026-11-21', fee:'Paid', feeClass:'paid', feeDetail:'Ticket shop is open; combo tickets with droidCon are also advertised.',
+    format:'1-day Flutter conference', registration:'Tickets are available through the official FlutterCon India site.',
+    experience:['Flutter and Dart keynotes','Practical codelabs','Peer roundtables and mobile engineering discussions'],
+    gain:'A focused mobile-dev event for Flutter students who want deeper engineering context and community access.'
+  },
+  'WordCamp Bengaluru 2026': {
+    startDate:'2026-11-21', fee:'Price TBA', feeClass:'tba', feeDetail:'Official site currently says “Tickets Coming Soon”; attendee pricing is not published yet.',
+    format:'Contributor Day + main event', registration:'Watch the official WordCamp Bengaluru site for ticket sales.',
+    experience:['WordPress and open-web talks','Contributor/community day','Developers, designers, agencies and creators in one room'],
+    gain:'Good crossover event for developers, freelancers, designers and people interested in the open web or agency business.'
+  },
+  'InnoHacks 4.0': {
+    startDate:'2026-10-03', fee:'Check official', feeClass:'tba', feeDetail:'The official 2026 page includes a cost FAQ but does not publicly expose the fee in its current page text.',
+    format:'24-hour student hackathon', registration:'Applications are handled through the event/Devfolio flow and include a shortlisting stage.',
+    experience:['24-hour team build','Industry mentorship and workshops','IoT, Agentic AI/GenAI, Web3 and open-innovation tracks'],
+    gain:'A good first serious hackathon for students who need a deadline to stop watching tutorials and start shipping.'
+  },
+  'hackCBS 9.0': {
+    startDate:'2026-10-31', fee:'Free', feeClass:'free', feeDetail:'The official FAQ explicitly says there is no participation or registration fee.',
+    format:'In-person student hackathon', registration:'Student teams apply and are shortlisted. Team size is 2–4.',
+    experience:['Intensive weekend build','Mentors, prizes and sponsor tracks','Themes including AI, Cloud, IoT, HealthTech and Web3'],
+    gain:'One of the stronger student hackathon recommendations because it is free, beginner-friendly and built around actually shipping.'
+  },
+  'ETHGlobal Mumbai': {
+    startDate:'2026-11-06', fee:'Application-based', feeClass:'mixed', feeDetail:'Hackers apply for acceptance. Check the official application page for the current participation/travel terms.',
+    format:'3-day Web3 builder hackathon', registration:'Applications are open through the official ETHGlobal Mumbai application page.',
+    experience:['Build with Ethereum/Web3 protocols','Technical mentorship and partner workshops','Prize tracks and high-intensity product shipping'],
+    gain:'More niche than normal web dev, but excellent for advanced builders who want an intense product-building environment.'
+  },
+  'Cypher 2026': {
+    startDate:'2026-10-07', priority:'top', priorityReason:'Strongest dedicated AI conference in this list for India.',
+    fee:'Paid', feeClass:'paid', feeDetail:'Current official pricing lists Standard Pass ₹13,000 incl. GST, with higher Learning and VIP tiers.',
+    format:'3-day AI summit + expo', registration:'Passes are on sale on the official Cypher ticket page.',
+    experience:['AI/ML, GenAI, agents and enterprise AI','150+ AI leaders planned across sessions','Expo, workshops, mentoring and satellite experiences'],
+    gain:'Use this to show students the difference between learning AI tools online and seeing the actual AI industry ecosystem.'
+  },
+  'Civo Navigate India 2026': {
+    startDate:'2026-11-24', fee:'Paid', feeClass:'paid', feeDetail:'Official pricing currently lists ₹5,000 early bird, then ₹7,000 general and ₹12,000 late.',
+    format:'1-day Cloud + AI + DevOps conference', registration:'Tickets are available on Civo’s official Navigate India registration page.',
+    experience:['Kubernetes and cloud-native talks','AI infrastructure and platform engineering','Networking with cloud/DevOps practitioners'],
+    gain:'Useful for backend students who want to understand what happens after an app leaves localhost.'
+  },
+  'MLH Global Hack Week: Data': {
+    startDate:'2026-09-11', fee:'Free', feeClass:'free', feeDetail:'MLH states Global Hack Week is 100% free for anyone, anywhere.',
+    format:'7-day online learning + building week', registration:'Online registration is open through Major League Hacking.',
+    experience:['SQL, databases and data visualization','Live technical challenges','Remote community sessions and portfolio building'],
+    gain:'One of the easiest zero-travel recommendations for students who want something practical and immediately accessible.'
+  },
+  'UXINDIA 2026': {
+    startDate:'2026-09-23', fee:'Paid', feeClass:'paid', feeDetail:'Student Rising Leaders passes are listed from ₹4,299 + GST; leadership passes are higher.',
+    format:'5-day design leadership week', registration:'Passes are available on the official UXINDIA site.',
+    experience:['Design leadership and AI-first product strategy','Rising Leaders Forum for students and practitioners','Mentorship, portfolio review and networking'],
+    gain:'Good for showing that UI/UX careers are about product, research, systems and leadership, not only visual screens.'
+  },
+  'DesignUp26': {
+    startDate:'2026-10-01', priority:'top', priorityReason:'Best broad product-design recommendation for frontend + UI/UX overlap.',
+    fee:'Paid', feeClass:'paid', feeDetail:'DesignUp explicitly uses paid passes with multiple tiers, including student passes.',
+    format:'4-day design festival', registration:'Passes are sold through the official DesignUp26 website.',
+    experience:['Product and digital design','Design systems and business thinking','Design community and leadership conversations'],
+    gain:'Probably the cleanest event to recommend to someone who wants to move from “making UI” toward real product design.'
+  },
+  'India HCI 2026': {
+    startDate:'2026-10-29', fee:'Paid', feeClass:'paid', feeDetail:'Early discounted registration: students ₹6,000; professionals ₹11,000.',
+    format:'3-day HCI research conference', registration:'Conference registration is open. Courses/workshops may have separate nominal fees.',
+    experience:['HCI research and inclusive design','Accessibility and emerging-technology discussions','Academic papers, keynotes and design research'],
+    gain:'More research-oriented than DesignUp. Strong for students curious about UX research, accessibility or higher studies.'
+  },
+  'Animation & More Summit 2026': {
+    startDate:'2026-08-28', fee:'Registration required', feeClass:'tba', feeDetail:'The official summit currently provides a Register Now flow; public pricing is not shown on the main event page.',
+    format:'2-day animation + creative-tech summit', registration:'Register through the official Animation & More Summit website.',
+    experience:['Animation, entertainment and creative technology','Global IP and studio-business conversations','Creators, studios, investors and technology innovators'],
+    gain:'A strong way to expand the video beyond coding while still staying inside technology and creative careers.'
+  },
+  'ANN Awards 2026': {
+    startDate:'2026-08-28', fee:'Paid entry', feeClass:'paid', feeDetail:'Award submissions require payment. Fees vary by category; the international category lists ₹10,000 per entry.',
+    format:'Animation awards + showcase', registration:'This is primarily a submission/competition opportunity. Entries are finalized after payment and verification.',
+    experience:['Animation work judged by industry jury','Student and professional categories','Visibility for original projects and studios'],
+    gain:'Mention it as a competition opportunity for creators, not as a normal conference attendees simply watch.'
+  },
+  'Anime India Mumbai 2026': {
+    startDate:'2026-08-28', fee:'Paid', feeClass:'paid', feeDetail:'The official site lists multiple ticket types and links to its ticketing partner for booking.',
+    format:'Anime convention + stage + concert', registration:'Tickets are bookable through the official Anime India page.',
+    experience:['Creator/fandom zones and Artists Alley','Cosplay, stage programming and Japanese culture','Guest appearances including industry creators'],
+    gain:'This is a TAM-expansion wildcard for animation, illustration, storytelling and creator audiences.'
+  },
+  'India Game Developer Conference 2026': {
+    startDate:'2026-10-28', priority:'top', priorityReason:'Best single event to represent the Indian game-development ecosystem.',
+    fee:'Paid', feeClass:'paid', feeDetail:'The official site has an active ticket-registration flow; ticket options vary by pass.',
+    format:'2-day game-dev conference + expo', registration:'Buy attendee tickets from the official IGDC site. Indie 60 applications are free if you are showcasing a game.',
+    experience:['Game-development talks and networking','Indie showcases, awards and publisher access','Game art, engineering, design and business'],
+    gain:'A must-mention if you want the video to reach students interested in games, 3D, interactive systems or indie development.'
+  },
+  'c0c0n 2026': {
+    startDate:'2026-10-09', fee:'Paid', feeClass:'paid', feeDetail:'Student conference pass is listed at ₹4,999; individual/corporate and training packages cost more.',
+    format:'2-day conference + optional trainings', registration:'Conference and training tickets are available through the official c0c0n registration page.',
+    experience:['Offensive and defensive security research','Cloud/API, malware, IoT and hardware security','Government, industry and researcher networking'],
+    gain:'The clearest cybersecurity recommendation in the list for students who want real security research exposure.'
+  },
+  'ICPC India 2026': {
+    startDate:'2026-10-03', priority:'top', priorityReason:'The competitive-programming event students already recognize globally.',
+    fee:'Paid per team', feeClass:'paid', feeDetail:'Kanpur regional site lists ₹1,500 per team for prelims + ₹4,500 per qualifying team for onsite round.',
+    format:'Team programming contest', registration:'College teams register through the ICPC process with a coach and complete stage-wise fees/documents.',
+    experience:['Algorithmic problem solving under time pressure','3-person collegiate teams','Preliminary + onsite regional competition'],
+    gain:'Use this to clearly separate competitive programming from hackathons: here the product is your problem-solving speed and algorithms.'
+  },
+  'NASA Space Apps Challenge 2026': {
+    startDate:'2026-11-14', priority:'top', priorityReason:'Huge TAM: coding, data, design, science and storytelling can all participate.',
+    fee:'Free', feeClass:'free', feeDetail:'NASA Space Apps is designed for broad participation; local events and the universal/virtual option are free to participate.',
+    format:'2-day global hackathon', registration:'Register on the official Space Apps website and choose a local event or virtual option when locations open.',
+    experience:['Real NASA and partner datasets','Software, data, science, design and storytelling challenges','Local + global community and judging'],
+    gain:'One of the best recommendations in the whole video because students from very different backgrounds can join the same event.'
+  },
+  'MLH Global Hack Week: Hacktoberfest': {
+    startDate:'2026-10-09', fee:'Free', feeClass:'free', feeDetail:'MLH states Global Hack Week is 100% free for anyone, anywhere.',
+    format:'7-day online open-source week', registration:'Register online through Global Hack Week.',
+    experience:['Open-source learning and challenges','Live community sessions','Remote project and contribution momentum'],
+    gain:'Great fallback for students who cannot travel but still want to join a real tech community week.'
+  },
+  'GDG Event Finder': {
+    startDate:'2026-10-01', fee:'Varies', feeClass:'mixed', feeDetail:'Most DevFest events are free, but individual local GDGs can charge a small fee.',
+    format:'Event directory / local discovery', registration:'Use the GDG event directory to find the closest city chapter and register on that event page.',
+    experience:['Discover nearby GDG meetups','Find city-specific DevFest registrations','Follow local developer communities'],
+    gain:'This is the practical action step for viewers: search their city instead of only saving a list of metro events.'
+  },
+  'SEMICON India 2026': {
+    startDate:'2026-09-17', fee:'Registration required', feeClass:'tba', feeDetail:'Visitor registration is open. The public visitor page currently does not show a visitor ticket price.',
+    format:'3-day semiconductor conference + exhibition', registration:'Visitors can create an account and register through the official SEMICON India portal.',
+    experience:['Semiconductor ecosystem and manufacturing','Silicon-to-systems exhibition','Deep-tech, hardware and infrastructure exposure'],
+    gain:'Use it to broaden students’ idea of tech beyond software and show the hardware layer behind AI and computing.'
+  },
+  'India Mobile Congress 2026': {
+    startDate:'2026-10-07', priority:'top', priorityReason:'Best “see the scale of the Indian tech industry” event for a broad audience.',
+    fee:'Free option', feeClass:'free', feeDetail:'Visitor Pass is FREE (limited access). Paid delegate passes are also available for full conference privileges.',
+    format:'4-day technology forum + exhibition', registration:'Free visitor passes are scheduled to be available from 15 Aug 2026; delegate passes are already listed.',
+    experience:['AI, telecom, cloud and cybersecurity','Semiconductors, startups and future networks','Large exhibition plus industry conference'],
+    gain:'Probably the broadest event in the list. A student can walk in and see how many different layers of technology exist.'
+  },
+  'Bengaluru Tech Summit 2026': {
+    startDate:'2026-11-17', priority:'top', priorityReason:'Strong closing event for AI, startups, deep tech and the larger Indian ecosystem.',
+    fee:'Paid', feeClass:'paid', feeDetail:'Current delegate tiers are listed at ₹4,000 Silver, ₹7,000 Gold and ₹10,000 Platinum (plus GST).',
+    format:'3-day integrated tech summit + exhibition', registration:'Delegate tickets and visitor/startup registration are available through the official BTS website.',
+    experience:['AI & Beyond conference tracks','Startups, investors and research ecosystem','Large multi-sector technology exhibition'],
+    gain:'An excellent closing recommendation because it connects coding, startups, research, investment and emerging technology in one place.'
+  },
+  'WeAreDevelopers Conference India': {
+    startDate:'2026-11-25', fee:'Price TBA', feeClass:'tba', feeDetail:'Registration opens soon; the official site currently has a waitlist and has not published India ticket pricing.',
+    format:'2-day developer + AI conference', registration:'Join the waitlist on the official site to be notified when tickets open.',
+    experience:['Software engineering and AI-builder sessions','Developer tooling and tech leadership','Large expo and professional networking'],
+    gain:'A strong professional-developer event to mention near the end, especially for viewers already beyond beginner level.'
+  }
+};
+
+const categoryWeight = {
+  web:'Core for most coding students',
+  ai:'High-interest for AI + backend learners',
+  design:'Strong crossover with frontend',
+  creative:'For animation, VFX + creator careers',
+  game:'For game builders + interactive tech',
+  cyber:'For security + ethical hacking learners',
+  cp:'Algorithms, DSA + team competition',
+  online:'Accessible from any city',
+  future:'Big-picture industry exposure'
+};
+
+categories.forEach(cat => {
+  cat.events = cat.events
+    .map(event => ({...event, ...(eventMeta[event.name] || {})}))
+    .sort((a,b) => String(a.startDate || '9999').localeCompare(String(b.startDate || '9999')));
+});
+
+let currentCategory = 0;
+let currentEvent = 0;
+
+const navEl = document.getElementById('categoryNav');
+const eventsEl = document.getElementById('events');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalEl = document.getElementById('modal');
+
+const shortTitles = {
+  web: 'Web & Software',
+  ai: 'AI, Data & Cloud',
+  design: 'UI/UX & Product',
+  creative: 'Animation & VFX',
+  game: 'Game Development',
+  cyber: 'Cybersecurity',
+  cp: 'Competitive Programming',
+  online: 'Online Events',
+  future: 'General & Future Tech'
+};
+
+function cityOnly(location) {
+  if (!location) return '';
+  const parts = location.split(',').map(s => s.trim());
+  return parts.length > 1 ? parts[parts.length - 1] : location;
+}
+
+function cleanDate(date) {
+  return date.replace(' 2026', ' ’26').replace('2026 season', '2026');
+}
+
+function domain(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ''); }
+  catch { return 'Official website'; }
+}
+
+function renderNav() {
+  navEl.innerHTML = `<div class="nav-label">Video order</div>` + categories.map((cat, i) => `
+    <button class="nav-btn ${i === currentCategory ? 'active' : ''}" onclick="selectCategory(${i})" title="${cat.title}">
+      <span class="nav-num">${String(i + 1).padStart(2,'0')}</span>
+      <span class="nav-name">${shortTitles[cat.id] || cat.title}</span>
+      <span class="nav-count">${cat.events.length}</span>
+    </button>
+  `).join('');
+}
+
+function sectionForEvent(event, categoryId) {
+  const hay = `${event.name} ${event.type} ${(event.tags || []).join(' ')}`.toLowerCase();
+  if (categoryId === 'cp' || /(hackathon|contest|competition|awards|challenge|global hack week|hack week)/.test(hay)) {
+    return { key: 'build', label: 'Hackathons, Challenges & Competitions' };
+  }
+  if (categoryId === 'online' && /(finder|local events)/.test(hay)) {
+    return { key: 'discover', label: 'Event Discovery' };
+  }
+  return { key: 'conference', label: 'Conferences & Community Events' };
+}
+
+function cardColumns(count) {
+  if (count >= 4) return 4;
+  if (count === 3) return 3;
+  if (count === 2) return 2;
+  return 1;
+}
+
+function renderEventCard(event, i) {
+  return `
+    <button class="event-card ${event.priority === 'top' ? 'top-pick' : ''}" onclick="openEvent(${i})" style="animation-delay:${i * 28}ms">
+      <div>
+        <div class="event-type">${event.type}</div>
+        <div class="event-name">${event.name}</div>
+      </div>
+      <div class="event-bottom">
+        <span class="event-date">${cleanDate(event.date)}</span>
+        <span class="event-city">${cityOnly(event.location)}</span>
+      </div>
+    </button>`;
+}
+
+function renderCategory() {
+  const cat = categories[currentCategory];
+  document.getElementById('categoryKicker').textContent = `${String(currentCategory + 1).padStart(2,'0')} / ${String(categories.length).padStart(2,'0')}`;
+  document.getElementById('categoryTitle').textContent = cat.title;
+  document.getElementById('categoryNote').textContent = `${cat.note}  •  ${categoryWeight[cat.id] || ''}`;
+  document.getElementById('eventCount').textContent = String(cat.events.length).padStart(2,'0');
+  document.getElementById('progressCopy').textContent = `${String(currentCategory + 1).padStart(2,'0')} / ${String(categories.length).padStart(2,'0')}`;
+  document.getElementById('progressBar').style.width = `${((currentCategory + 1) / categories.length) * 100}%`;
+
+  const groups = [];
+  const byKey = new Map();
+  cat.events.forEach((event, i) => {
+    const meta = sectionForEvent(event, cat.id);
+    if (!byKey.has(meta.key)) {
+      const group = {...meta, items: []};
+      byKey.set(meta.key, group);
+      groups.push(group);
+    }
+    byKey.get(meta.key).items.push({event, i});
+  });
+
+  eventsEl.style.gridTemplateColumns = '';
+  eventsEl.innerHTML = groups.map(group => {
+    const cols = cardColumns(group.items.length);
+    return `
+      <section class="event-section">
+        <div class="event-section-head">
+          <div class="event-section-title-wrap"><span class="event-section-dot"></span><span class="event-section-title">${group.label}</span></div>
+          <span class="event-section-count">${group.items.length} ${group.items.length === 1 ? 'event' : 'events'}</span>
+        </div>
+        <div class="event-section-grid cols-${cols}">
+          ${group.items.map(({event, i}) => renderEventCard(event, i)).join('')}
+        </div>
+      </section>`;
+  }).join('');
+}
+
+function renderAll() {
+  renderNav();
+  renderCategory();
+}
+
+function selectCategory(index) {
+  currentCategory = (index + categories.length) % categories.length;
+  currentEvent = 0;
+  closeModal();
+  renderAll();
+}
+
+function openEvent(index) {
+  currentEvent = index;
+  const event = categories[currentCategory].events[index];
+  const bestFor = event.bestFor || [];
+  const tags = event.tags || [];
+  const experience = event.experience || [];
+  const alt = event.altUrl ? `<a class="tag" href="${event.altUrl}" target="_blank" rel="noopener">Secondary official link ↗</a>` : '';
+  const priority = event.priority === 'top'
+    ? `<div class="top-pick-note"><strong>Top pick</strong><span>${event.priorityReason || 'Worth prioritising in the video.'}</span></div>`
+    : '';
+
+  modalEl.innerHTML = `
+    <div class="modal-top">
+      <div>
+        <div class="modal-kicker">${categories[currentCategory].title}</div>
+        <h2 class="modal-title">${event.name}</h2>
+      </div>
+      <button class="close-btn" onclick="closeModal()" aria-label="Close">×</button>
+    </div>
+
+    ${priority}
+
+    <div class="meta-strip">
+      <div class="meta-box"><div class="meta-label">When</div><div class="meta-value">${event.date}</div></div>
+      <div class="meta-box"><div class="meta-label">Where</div><div class="meta-value" title="${event.location}">${event.location}</div></div>
+      <div class="meta-box"><div class="meta-label">Fee</div><div class="meta-value fee-value ${event.feeClass || 'tba'}">${event.fee || 'Check official'}</div></div>
+      <div class="meta-box"><div class="meta-label">Format</div><div class="meta-value" title="${event.format || event.type}">${event.format || event.type}</div></div>
+    </div>
+
+    <div class="detail-columns">
+      <div class="detail-stack">
+        <div class="detail-block">
+          <div class="detail-heading-sm">What is this?</div>
+          <p class="detail-copy">${event.what}</p>
+          ${experience.length ? `<div class="mini-list">${experience.map(x => `<div class="mini-item">${x}</div>`).join('')}</div>` : ''}
+        </div>
+        <div class="detail-block">
+          <div class="detail-heading-sm">Why should a student care?</div>
+          <p class="detail-copy strong">${event.gain || event.why}</p>
+        </div>
+      </div>
+
+      <div class="detail-stack">
+        <div class="detail-block">
+          <div class="detail-heading-sm">Who is it for?</div>
+          <div class="tags">${bestFor.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="registration-box">
+          <div class="registration-title"><span>How to attend</span><span class="registration-status">${event.fee || 'Check official'}</span></div>
+          <p class="detail-copy">${event.registration || 'Use the official website for the latest registration instructions.'}</p>
+          <div class="price-note">${event.feeDetail || 'Pricing and registration can change. Verify on the official site before planning travel.'}</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-heading-sm">Topics / signals</div>
+          <div class="tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}${alt}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="event-nav-btn" onclick="stepEvent(-1)" title="Previous event">←</button>
+      <a class="official-btn" href="${event.url}" target="_blank" rel="noopener">
+        <span>Open Official Website ↗</span>
+        <span class="official-domain">${domain(event.url)}</span>
+      </a>
+      <button class="event-nav-btn" onclick="stepEvent(1)" title="Next event">→</button>
+    </div>
+    <div class="modal-source-note">Fee and registration status can change • always confirm on the official website before booking travel</div>
+  `;
+  modalBackdrop.classList.add('open');
+  modalBackdrop.setAttribute('aria-hidden', 'false');
+}
+function closeModal() {
+  modalBackdrop.classList.remove('open');
+  modalBackdrop.setAttribute('aria-hidden', 'true');
+}
+
+function stepEvent(delta) {
+  const events = categories[currentCategory].events;
+  currentEvent = (currentEvent + delta + events.length) % events.length;
+  openEvent(currentEvent);
+}
+
+const coverScreen = document.getElementById('coverScreen');
+function startPresentation() {
+  coverScreen.classList.add('hidden');
+  currentCategory = 0;
+  currentEvent = 0;
+  renderAll();
+}
+function showIntro() {
+  closeModal();
+  coverScreen.classList.remove('hidden');
+}
+document.getElementById('startPresentation').addEventListener('click', startPresentation);
+document.getElementById('showIntro').addEventListener('click', showIntro);
+
+document.getElementById('prevCategory').addEventListener('click', () => selectCategory(currentCategory - 1));
+document.getElementById('nextCategory').addEventListener('click', () => selectCategory(currentCategory + 1));
+document.getElementById('fullscreen').addEventListener('click', () => {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+});
+
+modalBackdrop.addEventListener('click', (e) => {
+  if (e.target === modalBackdrop) closeModal();
+});
+
+window.addEventListener('keydown', (e) => {
+  if (!coverScreen.classList.contains('hidden')) {
+    if (['Enter', ' ', 'ArrowRight'].includes(e.key)) { e.preventDefault(); startPresentation(); }
+    return;
+  }
+  if (e.key === 'Escape') closeModal();
+  if (modalBackdrop.classList.contains('open')) {
+    if (e.key === 'ArrowRight') stepEvent(1);
+    if (e.key === 'ArrowLeft') stepEvent(-1);
+    return;
+  }
+  if (e.key === 'ArrowRight') selectCategory(currentCategory + 1);
+  if (e.key === 'ArrowLeft') selectCategory(currentCategory - 1);
+  if (/^[1-9]$/.test(e.key)) {
+    const idx = Number(e.key) - 1;
+    if (categories[idx]) selectCategory(idx);
+  }
+});
+
+renderAll();
+</script>
+</body>
+</html>
